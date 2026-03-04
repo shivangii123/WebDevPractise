@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .container{
+            display: grid;
+            /* background-color: rgb(178, 138, 216); */
+            height: 400px;
+            width: 400px;
+            margin: auto;
+            margin-top: 80px;
+            grid-template-areas:  
+            " elm1 elm2 elm2 elm3"  /*give any name.. , match to Grid-area name...*/
+            " elm1 elm2 elm2 elm4" /* Grid-template se ->easy to work*/
+            " elm6 elm2 elm2 elm4"
+            " elm5 elm5 elm5 elm4";
+        }
+        .div1{
+            background-color: #c99e76;
+            grid-area: elm1;
+        }
+        .div2{
+            background-color: #7558aa;
+            grid-area: elm2;
+        }
+        .div3{
+            background-color: #eaec4f;
+            grid-area: elm3;
+        }
+        .div4{
+            background-color: #5ea8ca;
+            grid-area: elm4;
+        }
+        .div5{
+            background-color: #d09eda;
+            grid-area: elm5;
+        }
+        .div6{
+            background-color: #20b362;
+            grid-area: elm6;
+        } 
+        
+        .div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="div div1">1</div>
+        <div class="div div2">2</div>
+        <div class="div div3">3</div>
+        <div class="div div4">4</div>
+        <div class="div div5">5</div>
+        <div class="div div6">6</div>
+
+    </div>
+
+</body>
+</html>
