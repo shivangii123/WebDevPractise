@@ -1,0 +1,115 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
+h1{
+    font-size: 40px;
+    font-style: italic;
+    color: rgb(167, 233, 129);
+}
+.container{
+    background-color: #000;
+    color: aliceblue;
+    border: 2px solid rgb(90, 90, 90);
+    border-radius: 10px;
+    padding-left: 20px;
+    width: 25%;
+    height: 88vh;
+    display: flex;
+    flex-direction: column;
+    /* grid-template-areas: 
+    "btn1 btn2 btn3 btn4"
+    "btn5 btn6 btn7 btn8"
+    "btn9 btn10 btn11 btn12"
+    "btn13 btn14 btn15 btn16"
+    "btn17 btn17 btn18 btn19"; */
+    /* margin: 10px auto;  */
+    place-self: center;
+}
+.inp{
+    margin: 5px;
+    flex-grow: 1;
+    background-color: transparent;
+    color: aliceblue;
+    outline: none;
+    border: none;
+    text-align: right;
+    font-size: 40px;
+}
+.button-grid{
+    display: grid;
+    grid-template-columns: repeat(4 , 1fr);
+    grid-template-rows: repeat(5 ,1fr);
+    gap: 10px;
+    flex-grow: 2;   
+}
+button{
+    border-radius: 50%;
+    width: 80%;
+    height: 90%;
+    border: none;
+    outline: none;
+    background-color: #4b4646;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+.grey-btn{
+    background: #a39c9c;
+    color: #181717;
+}
+.orange-btn{
+    background-color:orange ;
+    color: whitesmoke;
+}
+.zero{
+    width: 88%;
+    grid-column: span 2;
+    border-radius:5cqi;
+}
+/* .btn1{
+    grid-area: btn1;
+}
+.btn2{
+    grid-area: btn2;
+}.btn3{
+    grid-area: btn3;
+}.btn4{
+    grid-area: btn4;
+}.btn5{
+    grid-area: btn5;
+}.btn6{
+    grid-area: btn6;
+}.btn7{
+    grid-area: btn7;
+}.btn8{
+    grid-area: btn8;
+}.btn9{
+    grid-area: btn9;
+}.btn10{
+    grid-area: btn10;
+}.btn11{
+    grid-area: btn11;
+}.btn12{
+    grid-area: btn12;
+}.btn13{
+    grid-area: btn13;
+}
+.btn14{
+    grid-area: btn14;
+}.btn15{
+    grid-area: btn15;
+}.btn16{
+    grid-area: btn16;
+}.btn17{
+    grid-area: btn17;
+}.btn18{
+    grid-area: btn18;
+}.btn19{
+    grid-area: btn19;
+} */
