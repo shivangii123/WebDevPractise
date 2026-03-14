@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #main{
+            display: flex ;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            margin: 20px ;
+            width: 60%;
+            border: 5px solid black;
+            border-radius: 10px;
+        }
+        h1{
+            text-align: center;
+            justify-content: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        #todo-form{
+            width: 100%;
+            padding: 20px 200px;
+        }
+        .task{
+            display: flex;
+            justify-content: space-between; /*space btw buttons */
+            align-items: center;
+            border: 2px solid grey ;
+            padding: 10px 40px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+        #todo-container{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .btn{
+            display: flex ;
+            justify-content: flex-end;
+            gap: 10px;
+            /* border-radius: 10px; */
+           
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h1> ToDo Manager</h1>
+
+        <form id="todo-form" action="">
+            <!--  // 0th child of form is input -->
+            <input type="text" placeholder="Enter the new task...">
+            <button>ADD</button>
+        </form>
+
+        <div id="todo-container">
+            <div class="task">
+                <h3> ToDo Task1 </h3> 
+                <div class="btn">
+                    <button class="complete-btn"> Complete </button>
+                    <button class="delete-btn"> Delete </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>
