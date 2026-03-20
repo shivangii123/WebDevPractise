@@ -5,19 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .canvas{
-            height: 500px;
-            width: 500px;
-            border:  5px solid rgb(124, 131, 23);
+        #mycanvas{
+            border: 2px solid black;
+            margin: 30px;
+        }
+        .navbar{
+            display: flex;
+            justify-content: center;
+            gap: 10px;
         }
     </style>
 </head>
 <body>
-       
-    <h1> Canvas</h1>
-    <canvas class="canvas"> </canvas>
+    <div class="navbar">
+        <input type="color" id="colorPicker" title="select color"/>  
+        <input type="range" id="brushSize" min="1" max="20" title="Change brush size">
+        <button id="clear"> Clear</button >
+        <button id="saveBtn"> Save</button>
+        <button id="pencil">Pencil</button>
+        <button id="rectangle"> Rectg</button>
+        <button id="circle">Circle </button>
+        <button id="arrow"> Arrow</button>
+        <!-- <input type="text" id="textBox" placeholder="Enter something.."> -->
+    </div>
 
-    <script src="app.js"></script>
+    <canvas id="mycanvas" width="1100" height="460" >   </canvas>
+    <script src="./canvas.js"></script>
 
 </body>
 </html>

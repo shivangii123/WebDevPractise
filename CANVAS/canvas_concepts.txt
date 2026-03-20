@@ -1,0 +1,217 @@
+
+// ======================= HTML CANVAS - QUICK NOTES =======================
+    // HTML -> has Web API's :
+    //   1) Canvas : Dispaly graphics like lines, square , reactangle, text on web page
+    //   2) svg : (scaler ector graphics)
+    //   They work as HTML tags , but actually they are Web API..
+
+// ---------------------- 1. WHAT IS CANVAS ----------------------
+// <canvas> is a drawing area in HTML
+// It is a Web API used for:
+// → shapes, drawing, animations, games
+
+// Think:
+// (1) canvas = paper             // (2) context (pen) = brush 
+
+// ---------------------- 2. BASIC SETUP ----------------------
+
+let canvas = document.getElementById("myCanvas"); // (1) white board-> canvas
+let pen = canvas.getContext("2d"); // 2D drawing tool (brush)->context
+
+// ---------------------- 3. COORDINATE SYSTEM ----------------------
+// (0,0) → top-left corner
+// x → increases right
+// y → increases downward
+
+
+// ---------------------- 4. RECTANGLES ----------------------
+// Filled rectangle
+pen.fillStyle = "red"; //paint mein dip karo brush ko
+pen.fillRect(x, y, width, height);
+
+// Outline rectangle
+pen.strokeStyle = "green";
+pen.strokeRect(x, y, width, height);
+
+
+// ---------------------- 5. PATH DRAWING ----------------------
+// Used for lines, triangles, custom shapes
+
+pen.beginPath();            // start new path (VERY IMPORTANT)
+
+pen.moveTo(x1, y1);         // starting point
+pen.lineTo(x2, y2);         // draw line
+pen.lineTo(x3, y3);
+pen.stroke();               // actually draw
+pen.closePath();            // optional
+
+
+// IMPORTANT:
+// beginPath() prevents shapes from connecting accidentally
+
+
+// ---------------------- 6. CIRCLE / ARC ----------------------
+pen.beginPath();
+pen.arc(x, y, radius, 0, 2*Math.PI);
+pen.stroke();
+// x,y → center
+// 2*Math.PI → full circle
+
+
+// ---------------------- 7. TEXT ----------------------
+
+pen.font = "bold 30px Arial";
+pen.fillStyle = "blue";
+pen.fillText("Hello", x, y);
+pen.strokeText("Hello", x, y);
+
+// ---------------------- 8. STYLING ----------------------
+
+pen.strokeStyle = "black";
+pen.fillStyle = "blue";
+pen.lineWidth = 5;
+
+// ---------------------- 9. GRADIENT ----------------------
+let grad = pen.createLinearGradient(0, 0, 300, 0);
+
+grad.addColorStop(0, "blue");
+grad.addColorStop(1, "green");
+
+pen.fillStyle = grad;
+pen.fillText("Welcome all", 310, 60);// Draw filled text
+
+
+// ---------------------- 10. CLEAR CANVAS ----------------------
+
+pen.clearRect(0, 0, canvas.width, canvas.height);
+
+// ---------------------- 11. SAVE CANVAS ----------------------
+let url = canvas.toDataURL("image/png");
+
+let link = document.createElement("a");
+link.href = url;
+link.download = "canvas.png";
+link.click();
+
+
+// ---------------------- 12. FREEHAND DRAWING ----------------------
+let isDrawing = false;
+
+canvas.addEventListener("mousedown", (e) => {
+    isDrawing = true;
+
+    pen.beginPath();
+    pen.moveTo(e.offsetX, e.offsetY);
+});
+canvas.addEventListener("mousemove", (e) => {
+    if (!isDrawing) return;
+
+    pen.lineTo(e.offsetX, e.offsetY);
+    pen.stroke();
+
+    //--------------------------------------------------------------------
+    //     // ****** If offsetX/Y fails-> for realtime cordinates use.. ********
+    //     // ***** clientX → mouse position relative to the viewport *********
+    //     // **** rect.left → canvas position relative to viewport   *********
+    //     // const rect = canvas.getBoundingClientRect();
+    //     // const x = e.clientX - rect.left; //->>canvasX = mouseX - canvasLeft
+    //     // const y = e.clientY - rect.top;  //->>canvasY = mouseY - canvasTop
+    //     // pen.moveTo(x,y);
+    //--------------------------------------------------------------------
+
+});
+canvas.addEventListener("mouseup", () => {  // mouse released inside canvas
+    isDrawing = false;
+});
+canvas.addEventListener('mouseleave', (e)=>{ //cursor leaves canvas area while still pressing mouse
+        isDrawing = false ;
+});
+
+// ---------------------- 13. IMPORTANT CONCEPTS ----------------------
+// Canvas is NOT memory
+// → it only shows pixels
+
+// Always store shapes separately:
+let shapes = [];
+
+// Drawing flow:
+//
+/*
+mousedown → start drawing
+mousemove → preview shape
+mouseup   → save shape in shapes[]
+render    → redraw all shapes
+*/
+
+
+// ---------------------- 14. RENDER ENGINE IDEA ----------------------
+function renderShapes() {
+    pen.clearRect(0, 0, canvas.width, canvas.height);
+    shapes.forEach(shape => {
+        // draw each shape again
+    });
+}
+
+// ---------------------- FINAL MENTAL MODEL ----------------------
+/*
+Canvas = screen
+Shapes array = real data
+Render = repaint screen from data
+*/
+
+// =====================================================================
+// ======================= CANVAS UI CONTROLS =======================
+
+// COLOR → line / stroke color
+let colorPicker = document.querySelector('#colorPicker');
+colorPicker.addEventListener('change', (e)=>{
+    pen.strokeStyle = e.target.value;
+});
+
+// BRUSH SIZE → line thickness
+let brushSize = document.querySelector('#brushSize');
+brushSize.addEventListener('change', (e)=>{
+    pen.lineWidth = e.target.value;
+});
+
+// CLEAR CANVAS → remove pixels
+let resetBtn = document.querySelector('#resetBtn');
+resetBtn.addEventListener('click', ()=>{
+    pen.clearRect(0,0,canvas.width,canvas.height);
+    // if using shapes[] → also: shapes = [];
+});
+
+// SAVE IMAGE → download canvas
+let saveBtn = document.querySelector('#saveBtn');
+saveBtn.addEventListener('click', ()=>{
+    let url = canvas.toDataURL("image/png");
+
+    let link = document.createElement('a');
+    link.href = url;
+    link.download = "canvas-image.png";
+
+    link.click();
+});
+
+
+// ======================= QUICK NOTES =======================
+
+// strokeStyle → outline color
+// fillStyle   → fill color
+// lineWidth   → thickness
+
+// beginPath() → start new shape (avoid connection)
+
+// clearRect() → clears canvas (pixels only)
+
+// canvas = screen
+// shapes[] = real data
+
+// FLOW:
+// mousedown → start
+// mousemove → preview
+// mouseup   → save
+// render    → redraw all
+
+// MOUSE POS:
+// e.offsetX, e.offsetY (best)
