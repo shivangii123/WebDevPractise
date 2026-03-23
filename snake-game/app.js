@@ -1,43 +1,23 @@
-// //==============Step1 ===============
-
-// let canvas = document.querySelector('canvas'); //board
-// let ctx = canvas.getContext('2d'); //brush
-
-// let cellSize =50;
-// let boardHeight =600;
-// let boardwidth = 600;
-
-// // snake ko draw
-// function draw(){ }
-
-// //snake update after every time interval
-// function update (){ }
-
-// setInterval( function() {
-//     update() ;
-//     draw() ;
-// }, 200)
-
-//==============Step2 ===============
 
 let canvas = document.querySelector('canvas');
 let ctx = canvas.getContext('2d');
 
-let cellSize = 20;
+let cellSize = 40;
 let boardHeight = canvas.height;
 let boardWidth = canvas.width;
-let direction = 'right' ;
+let direction = 'RIGHT' ;
+let score = 0;
 
 
 //snake ke cells jiski wajah se Snake Rectngle ban raha h..
 let snakeCells = [[0,0]]  ;
-//--> assume abhi snake moves right only..
+//--> assume initially Snake moves right only..
 
 // Generate FOOD
 function foodGenerate(){
     return [
-        Math.round(Math.random()*(boardWidth- cellSize)/cellSize)*cellSize ,
-        Math.round(Math.random()*(boardHeight- cellSize)/cellSize)*cellSize   
+        Math.floor(Math.random() * (boardWidth / cellSize)) * cellSize,
+        Math.floor(Math.random() * (boardHeight / cellSize)) * cellSize
     ]
 }
 let food = foodGenerate();
@@ -57,44 +37,43 @@ function draw(){
     // fillRect(x , y , width, height)
 }
 
-//sanke update after every time interval
+// Self- Collision 
+function isSelfCollision(x,y){
+    for(let cell of snakeCells){
+        if(cell[0]===x && cell[1]=== y){ 
+            return true ;}
+    }
+    return false ;
+
+}
+
+//snake update after every time interval
 function update (){
     let head_x = snakeCells[snakeCells.length -1][0] ;
     let head_y = snakeCells[snakeCells.length -1][1] ;
 
-    // let newHead_x = head_x + cellSize ;
-    // let newHead_y = head_y ;
-
-    let newHead_x, newHead_y ;
-    if(direction === 'right'){
-        newHead_x = head_x + cellSize;
-        newHead_y = head_y ;
-    }
-    else if(direction === 'left'){
-        newHead_x = head_x - cellSize;
-        newHead_y = head_y ;
-    }
-    else if(direction === 'up'){
-        newHead_x = head_x ;
-        newHead_y = head_y - cellSize;
-    }
-    else if(direction === 'down'){
-        newHead_x = head_x ;
-        newHead_y = head_y + cellSize;
-    }
-
+    // move snake
+    if(direction === 'RIGHT')   head_x += cellSize ;
+    else if(direction === 'LEFT') head_x -= cellSize ;
+    else if(direction === 'UP')   head_y -= cellSize ;
+    else if(direction === 'DOWN') head_y += cellSize ;
 
     //Boundary -Detection Condition
-    if(newHead_x < 0 || newHead_x >= boardWidth || newHead_y < 0 || newHead_y >= boardHeight){
-        alert("Game Over");
+    if(head_x < 0 || head_x >= boardWidth || head_y < 0 ||
+         head_y >= boardHeight || isSelfCollision(head_x, head_y)){
+        
+        clearInterval(gameloop)
+        alert(`Game Over \n Score :${score}` );
+        score = 0;         
         snakeCells = [[0,0]];
-        direction = "right";
+        direction = "RIGHT";
         return;
     }
 
-    snakeCells.push([newHead_x, newHead_y]);
+    snakeCells.push([head_x, head_y]);
     // FOOD - BITE
-    if(food[0] === newHead_x && food[1] === newHead_y){
+    if(food[0] === head_x && food[1] === head_y){
+        score += 1 ;
         food = foodGenerate();//re-generate food
     }
     else{
@@ -107,21 +86,21 @@ document.addEventListener('keydown', (e)=>{
     // console.log(e);
 
     //2nd condition of 'if'->>prevent opp dirc change
-    if(e.key === 'ArrowUp'  && direction !== 'down'){
-        direction ='up';
+    if(e.key === 'ArrowUp'  && direction !== 'DOWN'){
+        direction ='UP';
     }
     else if(e.key === 'ArrowRight'){
-        direction ='right';
+        direction ='RIGHT';
     }
     else if(e.key === 'ArrowDown'){
-        direction ='down';        
+        direction ='DOWN';        
     }
     else if (e.key === 'ArrowLeft'){
-        direction ='left';
+        direction ='LEFT';
     }
 })
 
-setInterval( function() {
+let gameloop = setInterval( function() {
     update() ;
     draw() ;
 }, 300)
