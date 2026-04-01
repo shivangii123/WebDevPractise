@@ -1,35 +1,103 @@
-// // 1) get form elm-> e.preventDefault()
-// Submission  ->get all 4 inputs in querySelALl , apply forEach loop:
-// // 2)Make card- createElm-> 
+///****** Form submit-> Card Show *********///
+
+let form = document.querySelector('form');
+let inputs = document.querySelectorAll('.inp');
 
 
-let submitBtn = document.querySelector("#submitBtn");
-let inp = document.querySelectorAll("input") ;
-let descp = document.querySelector("#description");
+form.addEventListener('submit',function(e){
+    e.preventDefault();
 
-console.log(inp[0].value);
-console.log(inp[1].value);
-console.log(descp.value);
+    // Check for empty field
+    let hasError = false ;
+    inputs.forEach( i=>{
+        if(i.value.trim() === ""){
+            i.style.border ="2px solid red" ;
+            hasError = true ;
+        }
+        i.addEventListener('input', ()=>{
+            if(i.value.trim() != "")
+                i.style.border ="" ;
+        })        
+    });
+    if(hasError){ 
+        alert("Please fill all fields!") ;
+        return ;
+    }
 
-submitBtn.addEventListener("click", function(e){
-    e.preventDefault(); //else card disaapar after each refersh 
 
-    // make new card
     let card = document.createElement('div');
+    card.classList.add('card') ;
 
-    card.innerHTML = `
-           <div class ='profile'> 
-                <img src ="" alt="prfle_img"> 
-            </div>
-            <h3> ${ inp[0] .value} </h3>
-            <h4> ${inp[1].value} </h4>
-            <h5> ${descp.value} </h5>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit consequatur facilis, dolores
-            aspernatur laudantium repellendus placeat aut explicabo voluptatum numquam corporis a.
-            </p>    `
+    let profile = document.createElement('div') ;
+    profile.classList.add('profile');
 
-    card.classList.add('card');
+    let img = document.createElement('img');
+    // img.setAttribute('src',inputs[0].value)
+    img.src = inputs[0].value || "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+    img.onerror = ()=>{
+        img.src = "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+    }
 
-    document.querySelector("#main").append(card) ;
+    let name = document.createElement('h3');
+    name.textContent = inputs[1].value ;
+
+    let profn = document.createElement('h5');
+    profn.textContent = inputs[2].value ;
+
+    let info = document.createElement('p');
+    info.textContent = inputs[3].value ;
+
     
-}) ;
+    profile.append(img);
+    card.append(profile,name,profn, info);
+    
+
+    let mainContainer = document.querySelector('.cardContainer');
+    mainContainer.append(card);
+
+    inputs.forEach(elm => {
+        elm.value = "" ; // empty value of each input box
+    });
+    
+    
+})
+
+
+// //------------- LIVE PREVIEW -----------------
+// // let inputs = document.querySelectorAll(".ip");
+// // let main = document.querySelector("#main");
+
+// // create preview card once
+// let previewCard = document.createElement("div");
+// previewCard.classList.add("card");
+
+// previewCard.innerHTML = `
+//     <div class="profile">
+//         <img id="previewImg" src="">
+//     </div>
+//     <h3 id="previewName"></h3>
+//     <h5 id="previewJob"></h5>
+//     <p id="previewInfo"></p>
+// `;
+
+// main.appendChild(previewCard);
+
+// // select preview fields
+// let pImg = document.querySelector("#previewImg");
+// let pName = document.querySelector("#previewName");
+// let pJob = document.querySelector("#previewJob");
+// let pInfo = document.querySelector("#previewInfo");
+
+// // update on typing
+// inputs.forEach((input, index) => {
+//     input.addEventListener("input", () => {
+
+//         pImg.src = inputs[0].value || "https://via.placeholder.com/40";
+//         pName.textContent = inputs[1].value;
+//         pJob.textContent = inputs[2].value;
+//         pInfo.textContent = inputs[3].value;
+
+//     });
+// });
+// //--------------------------------------------------------
+

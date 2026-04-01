@@ -27,15 +27,28 @@
             height: 100%;
             background-color: black;
         }
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        /* Cards layout */
+        .cardContainer{
+            display: flex;
+            flex-wrap: wrap;        /* important */
+            gap: 20px;
+            justify-content: center;
+        }
         .card{
             display: inline-block;
-            margin-top: 50px;
-            align-items: center ;
             border: 2px solid rgb(255, 255, 255);
             border-radius: 10px;
             background-color: rgb(125, 128, 131);
             max-width: 200px;   
             color: rgb(34, 37, 37);
+            padding: 10px;         
+            overflow: hidden;       /* prevents overflow */
+            word-wrap: break-word;  /* breaks long text */
         }
         .profile{
             height: 60px;
@@ -48,37 +61,43 @@
             height: 100%;
             width: 100%;
             object-fit: cover;
-
         }
+        .card h3, 
+        .card h5, 
+        .card p {
+            margin: 5px 0;
+            word-break: break-word;   /* handles long strings */
+        }
+        
     </style>
 </head>
 <body>
     <div id="main">
-       
-
         <form action="">
-            <input type="text" placeholder="type image url...">
-            <input type="text" placeholder="type name...">
-            <input type="text" placeholder="type profession...">
-            <input type="text" placeholder="Something about You...">
-            <input type="submit" id="submit">
+            <input type="text" class="inp" placeholder="type image url...">
+            <input type="text" class="inp" placeholder="type name...">
+            <input type="text" class="inp" placeholder="type profession...">
+            <input type="text" class="inp" placeholder="Something about You...">
+            <input type="submit" id="sbm" >
         </form>
 
-        <!-- <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAMAAABC4vDmAAAANlBMVEX////y8vK0tLT19fWxsbH6+vqurq7R0dG8vLzq6uq3t7fExMTj4+PIyMjv7+/Nzc3d3d3X19eRnLXdAAAFMUlEQVR4nO2c25akIAxFS0EERMX//9mBuo1VpeRw037wPMxaPd3Su5MQQsC63S5dunTp0qWVurMBPtR1jLFmJfdldyKi52l2dA5Zt8uzIjuUCyE6mAsmOowLN9JhWF080UP1sFKsVNtaGUh3rL+HVAMrOZg+VdSHhZhKUuUE+LdKBXwxMz1UhApg8oXCpNTU7K/QZanoX8OY6kcppZZy7BXAlT0LyV/hiLTgvL2Lc9E6rspU1Pis6fUT6CWu+4Z8rCqTbb+Q7litrUhFDj1vIN2x+mpUxMCsGcQ2k6MaKBcmUpHxOuzY6UlFKCkzZDF5KmqABCoqZ+7G05tqJqimaCqSaSGYHBU5B2OhqPEmCslTTdRfVthQ4YB6Qo1Fw4pkMoChEAfGUBFDNUwChnJQsmAOpQ21mzU/JUw5KspQzYAxtS2ZQuEZSKZNo1EobaixQFORpSaQo17iC/kXYrFO12gSZWpbMtQxU9E1+QSGuZegEihmKnIQZmOgyFSFxDptKHIpXotcliFTAZskOCF40UmBjipglzdFxLmLdDqoSP8BhlJwlvLSKt9U9AgVoAhTIX0DrEJ4i8zpDRXqSC/AREw+N/0QqLD/gAFqQAX9B3V9akCF/Ad1xyrEVNB/yPM1Zl/If1jPTkUlTxBq338YVPmMHoTCGq4sbu0DB82F6mOqBLIpREFBj+N7GS96P/NUXkg5qhgotAe/F1QwFLYVvXuPrtEJKPR5ZnEooBp+DpoJFZE+wSxVAoqNoKnovst/ZU0+D6XQXgLd6C8GhbWnkL4nCRVzWoWVL1jZ8tTO9IsYAdr7IXu+/8p2nxNiKWwtLgfFaAdydIUpBuWWZWIGCnApLglFhVVcQJWCcik0YCsRkTZDUNEH2IHCCi2jVspPCU+qRWxicaCr+KMy7vNUaiu1iyFidaGgUq5GNVZz/mklbckz5K2RykH5CwB2aF9e5EIPFrqcUBfKW2sy/SC1lkNvphQrhaDS74/4G5SMsTQbPZRbo1fR7m70TKg9pr8JVfCeVKz2d8gnBlVu1+VgqBODap/pvKAKtRdP81+wkX4WVIgpqVD4VgJTuLkf5T+34jGmjF36eXyqX6xR7Pu9B1LEiR/M0yizzLIVQvAvCdEOs1UKu2B5V5gJ8p+zhJkHV9ztb2fct3whw7DLtNTRGn3+P5lFiu3a/JtMCLkooMAiz2uDQ7Buci6LOZtxrlwmwl70JYCAqZhaNGSib4M5e4XiC7gDsEfEzPh9zxS3lxwDWDTTtqncrmVIMNKHucy0jQXdK/l91O1YZGCqoVxyc6OD3cD5NZWVEe38gIRefq0FXjb7fM7vgrOt9NKvteBbXetnprmMlV5ysfVBhTKtHMhs8ozbFR9XrYaIS3lvM4VaUOlU/P+NdZzpaSqmopJ3DNbreCT+omfUaWMk1aOpFnl7mB0BFX0n/QioWCbvwNpQCRfSWW2opBcKWF2oxJccuppQyS8/LTVS511iSWW6ddhZY7z4kPGWWFdlmXGrX96ba+gR9pFMt1v5YOd9JtKtfLRnxPhKqmRJ5eqDEkxuGSxUore+7oxf8PaEX9UPivMirnupiAuLue6tJbcK5W1RMz3UZO20OB/KRdNaav/NR0piKO25tzqjU6zFuTZVP1zCRPc5uBhMTaK7mrHFzeV+cqwTS9/q7MiR6OKCj/bAz3ZhZtBBg7nv6dHU+IiLoDplZ8k3WrL+/+Rs1VmfGNR1k+0HKfVdrf9HDr2dzvwIo7c61kxOB3860KVLly5d+vP6B2KXWGtI7SdZAAAAAElFTkSuQmCC" alt=""> -->
-        <div class="card">
-            <div class="profile">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAMAAABC4vDmAAAANlBMVEX////y8vK0tLT19fWxsbH6+vqurq7R0dG8vLzq6uq3t7fExMTj4+PIyMjv7+/Nzc3d3d3X19eRnLXdAAAFMUlEQVR4nO2c25akIAxFS0EERMX//9mBuo1VpeRw037wPMxaPd3Su5MQQsC63S5dunTp0qWVurMBPtR1jLFmJfdldyKi52l2dA5Zt8uzIjuUCyE6mAsmOowLN9JhWF080UP1sFKsVNtaGUh3rL+HVAMrOZg+VdSHhZhKUuUE+LdKBXwxMz1UhApg8oXCpNTU7K/QZanoX8OY6kcppZZy7BXAlT0LyV/hiLTgvL2Lc9E6rspU1Pis6fUT6CWu+4Z8rCqTbb+Q7litrUhFDj1vIN2x+mpUxMCsGcQ2k6MaKBcmUpHxOuzY6UlFKCkzZDF5KmqABCoqZ+7G05tqJqimaCqSaSGYHBU5B2OhqPEmCslTTdRfVthQ4YB6Qo1Fw4pkMoChEAfGUBFDNUwChnJQsmAOpQ21mzU/JUw5KspQzYAxtS2ZQuEZSKZNo1EobaixQFORpSaQo17iC/kXYrFO12gSZWpbMtQxU9E1+QSGuZegEihmKnIQZmOgyFSFxDptKHIpXotcliFTAZskOCF40UmBjipglzdFxLmLdDqoSP8BhlJwlvLSKt9U9AgVoAhTIX0DrEJ4i8zpDRXqSC/AREw+N/0QqLD/gAFqQAX9B3V9akCF/Ad1xyrEVNB/yPM1Zl/If1jPTkUlTxBq338YVPmMHoTCGq4sbu0DB82F6mOqBLIpREFBj+N7GS96P/NUXkg5qhgotAe/F1QwFLYVvXuPrtEJKPR5ZnEooBp+DpoJFZE+wSxVAoqNoKnovst/ZU0+D6XQXgLd6C8GhbWnkL4nCRVzWoWVL1jZ8tTO9IsYAdr7IXu+/8p2nxNiKWwtLgfFaAdydIUpBuWWZWIGCnApLglFhVVcQJWCcik0YCsRkTZDUNEH2IHCCi2jVspPCU+qRWxicaCr+KMy7vNUaiu1iyFidaGgUq5GNVZz/mklbckz5K2RykH5CwB2aF9e5EIPFrqcUBfKW2sy/SC1lkNvphQrhaDS74/4G5SMsTQbPZRbo1fR7m70TKg9pr8JVfCeVKz2d8gnBlVu1+VgqBODap/pvKAKtRdP81+wkX4WVIgpqVD4VgJTuLkf5T+34jGmjF36eXyqX6xR7Pu9B1LEiR/M0yizzLIVQvAvCdEOs1UKu2B5V5gJ8p+zhJkHV9ztb2fct3whw7DLtNTRGn3+P5lFiu3a/JtMCLkooMAiz2uDQ7Buci6LOZtxrlwmwl70JYCAqZhaNGSib4M5e4XiC7gDsEfEzPh9zxS3lxwDWDTTtqncrmVIMNKHucy0jQXdK/l91O1YZGCqoVxyc6OD3cD5NZWVEe38gIRefq0FXjb7fM7vgrOt9NKvteBbXetnprmMlV5ysfVBhTKtHMhs8ozbFR9XrYaIS3lvM4VaUOlU/P+NdZzpaSqmopJ3DNbreCT+omfUaWMk1aOpFnl7mB0BFX0n/QioWCbvwNpQCRfSWW2opBcKWF2oxJccuppQyS8/LTVS511iSWW6ddhZY7z4kPGWWFdlmXGrX96ba+gR9pFMt1v5YOd9JtKtfLRnxPhKqmRJ5eqDEkxuGSxUore+7oxf8PaEX9UPivMirnupiAuLue6tJbcK5W1RMz3UZO20OB/KRdNaav/NR0piKO25tzqjU6zFuTZVP1zCRPc5uBhMTaK7mrHFzeV+cqwTS9/q7MiR6OKCj/bAz3ZhZtBBg7nv6dHU+IiLoDplZ8k3WrL+/+Rs1VmfGNR1k+0HKfVdrf9HDr2dzvwIo7c61kxOB3860KVLly5d+vP6B2KXWGtI7SdZAAAAAElFTkSuQmCC" alt="profile_img">
+        <div class="cardContainer">
+        <!-- <div class="card">
+            <div class="profile">       
+                //<img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt ="profile_img">         
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt = "profile_img">
             </div>
             <h3> shivangii</h3>
             <h5> curious coder</h5>
             <p> Lorem ipsum dolor sit amet consectetur
                  adipisicing elit. Quas, veniam!</p>
+        </div> -->
         </div>
 
     </div>
 
     
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
 
