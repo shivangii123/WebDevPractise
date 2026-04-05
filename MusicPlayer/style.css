@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+button{
+    background: none;
+    border: 0 ;
+}
+i{
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+#progress{
+    cursor: pointer;
+    width: 90%;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border: 2px solid black;
+    width: 30vw;
+    height: 75vh ;
+    margin: 80px auto;
+    position: relative;
+}
+
+#play-section{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.song-item{
+    width: 12vw;
+    border: 2px solid black;
+    border-radius: 20px;
+    margin: 10px auto;
+    padding: 5px 10px ; 
+    cursor: pointer;
+    list-style: none;   
+}
+.song-item:hover{
+    background-color: lightgray;
+}
+
+
