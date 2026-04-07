@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time table </title>
+    <style> 
+        table{ 
+            margin: 100px ;
+            border-collapse: collapse;
+        }
+        td{
+            border: 2px solid black;
+            padding: 30px 50px;
+            font-size: large;
+            font-family:  sans-serif;
+            background-color: rgb(171, 201, 218);
+            text-align: center;
+        }
+        .break{
+            writing-mode: vertical-lr;
+            text-orientation: upright;
+            letter-spacing: 30px;
+            font-weight: bold;
+        }
+        caption{
+            /* caption-side: bottom; */
+            font-size: 30px;
+            font-weight: bold;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <table > 
+        <caption> Time Table </caption>
+        <thead>
+            <tr> <td></td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td></td>
+                <td colspan="2">4</td>
+                <td colspan="2">6</td>
+            </tr>  
+        </thead>
+        
+        <tbody> 
+            <tr> <td>Mon</td>
+                <td>C++</td>
+                <td>HTML</td>
+                <td>CSS</td>
+                <td class="break" rowspan="5">  BREAK</td>
+                <td colspan="2">JAVA</td>
+                <td colspan="2">c++</td>
+            </tr>
+        
+            <tr> <td>Tue</td>
+                <td rowspan="3">Hindi</td>
+                <td colspan="2">Web Dev</td>
+                <td>C++</td>
+                <td>HTML</td>
+                <td>CSS</td>
+                <td rowspan="2">OS</td> 
+            </tr>
+
+            <tr> <td> Wed</td>
+                <td colspan="2">C++</td>
+                <td colspan="3">Django</td> 
+            </tr>
+
+            <tr> <td>Thu</td>
+                <td colspan="2">Java</td>
+                <td>English</td>
+                <td>Go</td>
+                <td colspan="2">Networks</td> 
+            </tr>
+            
+            <tr> <td>Fri</td>
+                <td colspan="3">Data Science</td>
+                <td colspan="2">C++</td>
+                <td>Go</td>
+                <td>Python</td> 
+            </tr>
+        </tbody>
+
+    </table>
+</body>
+</html>
