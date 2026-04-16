@@ -26,28 +26,28 @@ console.log(ans2(3,5));
 
 //--------------To send something-------------
 
-// module.exports = {} //by default empty object is sent, if we write this or not
-// we  can send anything instead of this empty objects..
+module.exports = {} //by default empty object is sent, if we write this or not
+we  can send anything instead of this empty objects..
 
-// module.exports = {
-//     PI :PI,
-//     ans1:ans1,
-//     ans2 :ans2       
-// }
+module.exports = {
+    PI :PI,
+    ans1:ans1,
+    ans2 :ans2       
+}
 
-// if key and value name same, skip (value & ':') 
-// module.exports = {
-//     PI ,
-//     ans1,
-//     ans2 :ans2       
-// }
+if key and value name same, skip (value & ':') 
+module.exports = {
+    PI ,
+    ans1,
+    ans2 :ans2       
+}
 
-// module.exports ={
-// // key    value
-//     PII : PI,
-//     ans1 : ans1,
-//     ans2 : ans2
-// }
+module.exports ={
+// key    value
+    PII : PI,
+    ans1 : ans1,
+    ans2 : ans2
+}
 
 //send anything other tha Objects->yes
 module.exports = "shivangii"
