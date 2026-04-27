@@ -45,7 +45,7 @@ app.get( '/hello', (req,res)=>{
 
 app.get('/test', (req, res) => {
     res.status(201).json({
-        message: "All good",
+        message: "Everything Working good !! ",
         data: [1,2,3]
     });
 });
