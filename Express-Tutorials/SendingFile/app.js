@@ -55,7 +55,7 @@ app.use(function(req,res,next){
 //(2)Path Start match middleware, starting with user/abc/..xyz
 app.use('/greet', (req,res,next)=>{
     console.log("Running middleware -3");
-    next();// go to next route 
+    next();// go to next matching route 
 })
 
 
