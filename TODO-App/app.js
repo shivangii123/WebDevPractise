@@ -5,6 +5,7 @@ const { v4: uuid } = require('uuid');//package to generate UNIQUE ID..
 
 const PORT = 5555;
 
+//Middlewares..
 app.use(express.static(path.join(__dirname, 'public'))) ;
 app.use(express.json()); // axios send json  data
 app.use(express.urlencoded());
@@ -18,7 +19,7 @@ app.get('/todos', (req,res)=>{
 app.post('/todos', (req,res)=>{
     const {task} = req.body;
     todos.push({
-        taskName : task ,id :uuid() ,status :false 
+        taskName:task ,id :uuid() ,status :false 
     })
     res.send({
         msg: 'Task added successfully ' ,
@@ -27,7 +28,7 @@ app.post('/todos', (req,res)=>{
 })
 
 
-app.put( '/todos', (req,res)=>{
+app.put('/todos', (req,res)=>{
     const {id} = req.body ;
     todos = todos.map(item =>{
         if(id == item.id){
@@ -46,6 +47,7 @@ app.put( '/todos', (req,res)=>{
 
 app.delete('/todos', (req,res)=>{
     const {id} = req.body ;
+    console.log(`id is :`,id);
     todos = todos.filter(item =>{
         return id !==item.id
     })
@@ -54,6 +56,16 @@ app.delete('/todos', (req,res)=>{
         todos 
     })
 });
+
+app.put('/clear-completed', (req,res)=>{
+    todos = todos.filter(item =>{
+        return item.status === false ;
+    })
+    res.send({
+        msg : 'Completed Todos cleared...',
+        todos
+    })
+})
 
 
 app.listen(PORT, ()=>{
