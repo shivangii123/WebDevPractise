@@ -47,6 +47,7 @@ app.put('/todos', (req,res)=>{
 
 app.delete('/todos', (req,res)=>{
     const {id} = req.body ;
+    console.log(`id is :`,id);
     todos = todos.filter(item =>{
         return id !==item.id
     })
