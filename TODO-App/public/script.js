@@ -118,7 +118,7 @@ function renderTodosOnUI(data){
                     <!-- store ID using (data-* attribute) -->
             <button class="completed-btn" data-id ="${d.id}"> 
                 ${d.status ?'Pending': 'Completed'}   </button>
-            <button class="edit-btn">Edit</button>
+            <!-- <button class="edit-btn">Edit</button> -->
             <button class="delete-btn" data-id = "${d.id}">Delete</button>
         </div>
         `
