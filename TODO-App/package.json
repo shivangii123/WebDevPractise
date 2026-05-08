@@ -1,8 +1,8 @@
 {
   "name": "todo-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "1. Click Add Todo(form submit) -->> Post request on server\r 2. Push data in todos Array \r 3. response mein msg aya->succesfully added a new todo \r 4. If Success->> refreshTodo()->Get all Data..\r ` axios.get('/todos')\r         .then(({data})=>{\r             console.log(data);\r             data.forEach(d =>{               \r                 let li = document.createElement('li');\r                 li.innerHTML = `\r                 <span class=\"task-text\"> ${d.taskName}</span>\r                 <div class=\"task-actions\">\r                     <button class=\"completed-btn\"> ${d.status ?'Pending': 'Completed'}</button>\r                     <button class=\"edit-btn\">Edit</button>\r                     <button class=\"delete-btn\">Delete</button>\r                 </div>\r                 `\r                 taskList.appendChild(li);\r             })    \r         })\r `\r 5. Else ->> print Error message..",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

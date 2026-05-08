@@ -36,7 +36,7 @@ axios.put('/todos', {id})
     })
 `
 👉 Backend sends { msg, todos }
-👉 Axios wraps whateer backend sends → { data: { msg, todos } }
+👉 Axios wraps whatever backend sends → { data: { msg, todos } }
 
 # **App flow:**
 
