@@ -151,7 +151,7 @@ function refreshTodos(){
     axios.get('/todos')
         .then(({data})=>{
             console.log('all todos data', data.allTodos);
-            currentTodos = data.allTodos;
+            currentTodos = data.allTodos; //update data
             
             // Now show all todos on UI..
             renderTodosOnUI(data.allTodos) ;   
@@ -163,6 +163,7 @@ function renderTodosOnUI(data){
     taskList.innerHTML = ''; //empty the existing taskList
 
     data.forEach(d =>{               
+
         let li = document.createElement('li');
         li.innerHTML = `
         <span class="task-text"> ${d.task}</span>
