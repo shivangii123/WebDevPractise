@@ -1,110 +1,66 @@
-const express = require('express');
-const app = express();
-const path = require('path') ;
-const PORT = 4444;
+const express = require('express'); //Load Express module into this file
+const app = express(); //Create Express application object
+const PORT = 3000;
 
-app.use(express.json());
-app.use(express.static(path.join(__dirname,'public'))) ;
+app.use(express.json()); // axios send json  data
 app.use(express.urlencoded({extended :true}));
 
-const { MongoClient, ObjectId } = require('mongodb');
+//MongoDb and NodeJs connection code
+const { MongoClient } = require('mongodb'); // import mongoClient
 
 // Connection URL
-const url = 'mongodb://localhost:27017';
-const client = new MongoClient(url);
+const url = 'mongodb://localhost:27017'; //By default port of MongoDb
+const client = new MongoClient(url); //Create MongoDB client object
 
-//DB Name
-const dbName ='Test' ; 
-let db = null ;
-// db->test , collection-> todos
-
+// Database Name
+const dbName = 'testDb';//if DB exists use it , else create new one
 
 async function main() {
-    await client.connect(); //1. Connect Nodejs with Mongodb
-    console.log('Connected successfully to server');
-    db = client.db(dbName); //2. Create Database
-   
-    //Read all todo->> findOne()/insertMany()
-    app.get('/todos', async(req,res)=>{
-            //get req-> finad all data..
-      try {
-          let Todos = db.collection('Todos');   // 1.Todos Collection ko utha lao
-          const allTodos= await Todos.find({}).toArray(); //2. DB commands se fetch data..
-          //find()->returns cursor obj, toArray()->> to get actual array data
-          console.log("Current todos are:", allTodos);
-          res.send({allTodos })
-      } catch (err) {
-            res.status(500).json({msg :err.message}) ;        
-      }
-    })
+    
+    await client.connect() ; //Connect Node.js app to MongoDB server.
+    console.log("NODEJs successfully connected to Mongodb");
 
-    //Add new todo->> insertOne()/insertMany()
-    app.post('/todos', async(req,res)=>{
-         //post req-> insert data..
-        const {task} = req.body;
-        let Todos = db.collection('Todos'); //if todos collectn h use it ,else create new one
-        const insertedTodos= await Todos.insertOne({task, status: false});
-        console.log("inserted todos are:", insertedTodos);
-        res.send({
-            msg :'Insertion Done' ,
-            task
-        })
-    }) 
+    const db = client.db(dbName) ; //db()->Select database 
+    const users = db.collection('users'); //collection()-> Select Collection
 
-    //Update status ->
-    app.put('/todos', async(req,res)=>{
-        const{id} = req.body ;//postman mein "id" is sent
-        let Todos = db.collection('Todos');
+    // users.find({}).toArray()//DB se data nikalme mein time lagega so it's a Promise
+    //     .then( (data)=>{
+    //         console.log( data);
+    //     })
+    //     .catch(err => 
+    //         console.log(err)
+    //     )
 
-        //find current todo
-        let todo= await Todos.findOne({
-            _id :new ObjectId(id)  //"_id" in Mongo match with "id" in postman then update karo
-        }) ;
+    // const currResult = await users.find({}).toArray() ;
+    // console.log(`Current documents :`,currResult);
+            
+    //find
+    users.find({name :'shivangi'}).toArray()
+        .then((data)=> console.log(data))
+        .catch(err =>console.log(err))
 
-        // Toggle status
-        await Todos.updateOne( //_id in MongoDB is ObjectId, not string(Postman)
-            {_id : new ObjectId(id)},
-            { $set : { status : !todo.status}}
-        )
-        res.status(200).json({
-            msg:'Status updated'
-        })
-    })
+    // Insert one document (row)
+    users.insertOne({
+        name: 'shivangi',
+        age: 21,
+        location:'pune'
+    })   
 
-    app.delete('/todos', async(req,res)=>{
-        const{id} = req.body ;
-        let Todos = db.collection('Todos');
-        let deletedResult= await Todos.deleteOne(
-            {_id : new ObjectId(id)}
-        )
-        // console.log(deletedResult.deletedCount);
+    // users.insertMany([{ a: 1 }, { a: 2 }, { a: 3 }])
+    // .then((data) =>{
+    // console.log('Inserted documents =>', data)
+    // })
 
-        res.status(200).json({
-            msg: 'todo Deleted successfully'
-        })
-    })
+    // const deleteResult = await users.deleteMany({name:"shivangi" });
+    // console.log(`Deleted documents :`, deleteResult);
 
-
-    app.put('/clear-completed', async(req,res)=>{
-        let Todos = db.collection('Todos') ;
-        // delete from Mongodb where Todos completed
-        await Todos.deleteMany({status : true})
-
-        res.send({
-            msg : 'Completed Todos cleared...' ,
-        })
-    })
-
-    return 'done' ;
+    return 'done' ;   
 }
-   
 
 main()
-.then(()=>{
-    app.listen(PORT,()=>{
-    console.log(`listening on http://localhost:${PORT}`);
+    .then(()=>{
+        app.listen(PORT , ()=>{ // start server
+            console.log("Listening to http://localhost:"+PORT) ;
+        })
     })
-})
-.catch(err=>{
-    throw new Error(err.message);
-})
+    .catch(err=> console.log(err))
