@@ -85,7 +85,7 @@ async function main() {
         })
     })
 
-
+    // Clear Completed Todos from List
     app.put('/clear-completed', async(req,res)=>{
         let Todos = db.collection('Todos') ;
         // delete from Mongodb where Todos completed
