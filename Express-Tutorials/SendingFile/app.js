@@ -39,8 +39,12 @@ const path = require ('path');
 
 // ---------------------------------------------------------
 //Middleware-> function that runs prior doing anything ->check login before any payment, any task..
+//Middleware ->functions->each incoming req par chalrah h
+//Middleware are functions that sit in the middle of the request-response cycle.
+
 //***(1)Generic middleware*** ->run for every request on express server
 //run for "/" and "/greet" both console.log(runing middleware 1 & 2)..
+// run on all 'GET', 'POST', 'PATCH','DELETE'...
 app.use(function(req,res,next){
     console.log(`Running middleware-1`);
     next();// to go ahead and move towards next function we call this
@@ -55,11 +59,14 @@ app.use(function(req,res,next){
 //(2)Path Start match middleware, starting with user/abc/..xyz
 app.use('/greet', (req,res,next)=>{
     console.log("Running middleware -3");
-    next();// go to next matching route 
+     next();//aage middleware(function)par bhejdo 
+    //match next function with req->"/cat" ,wo execute hoga
 })
 
 
 //(3)Path fixed :-(app.get())
+//app.get() → defines a route to handle GET requests.
+
 app.get('/',(req,res)=>{
     res.send("hello world");
 })
@@ -76,6 +83,10 @@ app.post('/greet', (req,res)=>{
     const {name} = req.body ;
     console.log(name);
 })
+
+/*  default path -> '/'(slash)
+    default methos -> 'GET'
+*/
 
 app.listen(PORT, ()=>{
     console.log(`Server listening :http://localhost:${PORT}`);
