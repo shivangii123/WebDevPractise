@@ -12,6 +12,7 @@ app.use(express.json());
 
 app.post('/orders', async (req, res) => {
     const {productName, price, customerId} = req.body;
+
     let newOrder = await order.insertOne({
         productName,
         customerId,
