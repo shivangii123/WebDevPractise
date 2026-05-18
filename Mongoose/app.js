@@ -24,3 +24,21 @@ app.post('/orders', async (req, res) => {
         newOrder
     })
 })
+
+app.post('/customer', async (req, res) => {
+    const {name, email} = req.body;
+    console.log(name, email);
+    let newCustomer = await customers.insertOne({
+        name,
+        email
+    })
+
+    res.status(200).json({
+        message: 'Customer Created Successfully',
+        newCustomer
+    })
+})
+
+app.listen(PORT, ()=>{
+    console.log(`listening to ${PORT}`);
+})
