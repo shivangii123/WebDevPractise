@@ -39,6 +39,18 @@ app.post('/customer', async (req, res) => {
     })
 })
 
+app.get('/orders', async (req, res) => {
+    const {customerId} = req.query;
+    let orderData = await order.find({
+        customerId
+    }).populate({
+        path: 'customerId',
+        select : 'name'
+    })
+
+    res.send(orderData);
+})
+
 app.listen(PORT, ()=>{
     console.log(`listening to ${PORT}`);
 })
