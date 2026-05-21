@@ -3,7 +3,8 @@ const app = express();
 const path = require('path');
 const { v4: uuid } = require('uuid');//package to generate UNIQUE ID..
 
-const PORT = 5555;
+
+const PORT = 5555; // set port 
 
 //Middlewares..
 app.use(express.static(path.join(__dirname, 'public'))) ;
