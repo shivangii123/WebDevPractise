@@ -6,6 +6,7 @@ const { v4: uuid } = require('uuid');//package to generate UNIQUE ID..
 
 const PORT = 5555; // set port 
 
+
 //Middlewares..
 app.use(express.static(path.join(__dirname, 'public'))) ;
 app.use(express.json()); // axios send json  data
