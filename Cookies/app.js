@@ -7,11 +7,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/login', (req, res) => {
-  console.log('Home page');
-
-  res.send('welcome , you are loginnedIn');
+  console.log("Login succesfull, Welcome  ");
 });
-
+ c
 app.get('/profile',(req,res)=>{
   console.log("first login");
 })
