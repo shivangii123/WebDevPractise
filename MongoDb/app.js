@@ -63,4 +63,6 @@ main()
             console.log("Listening to http://localhost:"+PORT) ;
         })
     })
-    .catch(err=> console.log(err))
+    .catch(err=>{
+        console.log(err.message);
+    })
