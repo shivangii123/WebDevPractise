@@ -40,16 +40,12 @@ async function main() {
         .catch(err =>console.log(err))
 
     // Insert one document (row)
-    users.insertOne({
-        name: 'shivangi',
-        age: 21,
-        location:'pune'
-    })   
+    users.insertOne({name: 'shivangi', age: 21, location:'pune'  })  
+    
+    // update
+    const updateInfo = await users.updateOne({name:'siya'} , {$set :{ name :'tina'}})
+    console.log('Updated info is =>', updateInfo);
 
-    // users.insertMany([{ a: 1 }, { a: 2 }, { a: 3 }])
-    // .then((data) =>{
-    // console.log('Inserted documents =>', data)
-    // })
 
     // const deleteResult = await users.deleteMany({name:"shivangi" });
     // console.log(`Deleted documents :`, deleteResult);
