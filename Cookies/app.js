@@ -9,9 +9,11 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/login', (req, res) => {
   console.log("Login succesfull, Welcome  ");
 });
- c
+ 
 app.get('/profile',(req,res)=>{
   console.log("first login");
+  console.log('redirecting to login page');
+  res.redirect('/login')
 })
 
 app.listen(PORT, () => {
