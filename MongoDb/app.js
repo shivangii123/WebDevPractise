@@ -39,8 +39,12 @@ async function main() {
         .then((data)=> console.log(data))
         .catch(err =>console.log(err))
 
+    const fetchedInfo = await users.find({name:'shivangi'}).toArray() ;
+    console.log('fetched info is =>', fetchedInfo);
+
     // Insert one document (row)
     users.insertOne({name: 'shivangi', age: 21, location:'pune'  })  
+    console.log('Inserted a document');
     
     // update
     const updateInfo = await users.updateOne({name:'siya'} , {$set :{ name :'tina'}})
