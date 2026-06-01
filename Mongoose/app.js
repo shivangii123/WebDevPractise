@@ -19,7 +19,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/Test')
 
 app.get('/', (req, res) => {
   console.log('Home page');
-  res.send('welcome all of you ..!!!\n how are you');
+  res.send('welcome all of you ..!!!\n how are you all');
+
 });
 
 app.listen(PORT, () => {
