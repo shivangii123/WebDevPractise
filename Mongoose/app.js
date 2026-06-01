@@ -17,9 +17,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/Test')
     console.log(err.message);
   })
 
-app.get('/', (req, res) => {
+app.get('/hello', (req, res) => {
   console.log('Home page');
-  res.send('welcome all of you ..!!!\n how are you all');
+  res.send('Hello \n welcome all of you ..!!! ');
 
 });
 
