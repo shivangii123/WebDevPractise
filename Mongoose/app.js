@@ -23,6 +23,19 @@ app.get('/hello', (req, res) => {
 
 });
 
+app.post('/orders', async (req, res) => {
+    const {productName, price, customerId} = req.body;
+    let newOrder = await order.insertOne({
+        productName,
+        customerId,
+        price
+    })
+    res.status(200).json({
+        message: 'Order Created Successfully',
+        newOrder
+    })
+})
+
 app.listen(PORT, () => {
   console.log('Listening to http://localhost:' + PORT);
 });
