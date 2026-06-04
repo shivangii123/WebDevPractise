@@ -20,6 +20,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/Test')
 app.get('/hello', (req, res) => {
   console.log('Home page');
   res.send('Hello \n welcome all of you ..!!! ');
+
 });
 
 app.post('/orders', async (req, res) => {
@@ -30,7 +31,7 @@ app.post('/orders', async (req, res) => {
         price
     })
     res.status(200).json({
-        message: 'Order Created Successfully',
+        message: 'Order is Created Successfully',
         newOrder
     })
 })
