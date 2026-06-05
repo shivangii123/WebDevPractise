@@ -17,6 +17,18 @@ mongoose.connect('mongodb://127.0.0.1:27017/Test')
     console.log(err.message);
   })
 
+  
+// 1.Create Schema(blueprint of Model looks like)
+const todosSchema = new mongoose.Schema({
+    task : String,
+    status : {typs : Bboolean, default :false} ,
+    date :{type :Date,default :Date.now}  
+})
+
+// 2. Create a Model (.e Collection, in which we insert documents)
+// this collection has Constraints on it
+const Todos = mongoose.model('Todos', todosSchema) ;
+
 app.get('/hello', (req, res) => {
   console.log('Home page');
   res.send('Hello \n welcome all of you ..!!! ');
