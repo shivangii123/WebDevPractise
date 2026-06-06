@@ -21,7 +21,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/Test')
 // 1.Create Schema(blueprint of Model looks like)
 const todosSchema = new mongoose.Schema({
     task : String,
-    status : {typs : Bboolean, default :false} ,
+    status : {type : Boolean, default :false} ,
     date :{type :Date,default :Date.now}  
 })
 
@@ -31,7 +31,7 @@ const Todos = mongoose.model('Todos', todosSchema) ;
 
 app.get('/hello', (req, res) => {
   console.log('Home page');
-  res.send('Hello \n welcome all of you ..!!! ');
+  res.send('Hello \n welcome all of you to my app ..!!! ');
 
 });
 
