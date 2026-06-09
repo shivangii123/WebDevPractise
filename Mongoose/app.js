@@ -31,7 +31,8 @@ const Todos = mongoose.model('Todos', todosSchema) ;
 
 app.get('/hello', (req, res) => {
   console.log('Home page');
-  res.send('Hello \n welcome all of you to my app ..!!! ');
+
+  res.send('Hello \n welcome all of you ..!!! ');
 
 });
 
