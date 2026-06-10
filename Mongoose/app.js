@@ -36,6 +36,15 @@ app.get('/hello', (req, res) => {
 
 });
 
+
+// 3. Inserting a document
+app.post('/todos',(req,res)=>{
+    const todo = req.body ;
+    res.send("inserted doc") ;
+    
+})
+
+
 app.post('/orders', async (req, res) => {
     const {productName, price, customerId} = req.body;
     let newOrder = await order.insertOne({
