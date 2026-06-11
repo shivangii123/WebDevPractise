@@ -25,7 +25,7 @@ const todosSchema = new mongoose.Schema({
     date :{type :Date,default :Date.now}  
 })
 
-// 2. Create a Model (.e Collection, in which we insert documents)
+// 2. Create a Model (i.e Collection, in which we insert documents)
 // this collection has Constraints on it
 const Todos = mongoose.model('Todos', todosSchema) ;
 
@@ -40,7 +40,7 @@ app.get('/hello', (req, res) => {
 // 3. Inserting a document
 app.post('/todos',(req,res)=>{
     const todo = req.body ;
-    res.send("inserted doc") ;
+    res.send("inserted a todo") ;
     
 })
 
