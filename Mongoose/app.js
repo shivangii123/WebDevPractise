@@ -19,7 +19,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/Test')
 
   
 // 1.Create Schema(blueprint of Model looks like)
-const todosSchema = new mongoose.Schema({
+const TodosSchema = new mongoose.Schema({
     task : String,
     status : {type : Boolean, default :false} ,
     date :{type :Date,default :Date.now}  
@@ -27,21 +27,26 @@ const todosSchema = new mongoose.Schema({
 
 // 2. Create a Model (i.e Collection, in which we insert documents)
 // this collection has Constraints on it
-const Todos = mongoose.model('Todos', todosSchema) ;
-
-app.get('/hello', (req, res) => {
-  console.log('Home page');
-
-  res.send('Hello \n welcome all of you ..!!! ');
-
-});
-
+const Todos = mongoose.model('Todos', TodosSchema) ;
 
 // 3. Inserting a document
 app.post('/todos',(req,res)=>{
     const todo = req.body ;
-    res.send("inserted a todo") ;
     
+    const newTodo = new Todos({task})
+    newTodo.save() ;
+
+    res.send({
+      msg :"Insertion done" ,
+      task
+    })
+})
+
+app.post('/todos', (req,res)=>{
+  const todo = req.body ;
+
+
+  res.send("")
 })
 
 
