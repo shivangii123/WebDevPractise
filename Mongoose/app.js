@@ -42,26 +42,42 @@ app.post('/todos',(req,res)=>{
     })
 })
 
-app.post('/todos', (req,res)=>{
-  const todo = req.body ;
+// Read 
+app.get('/todos', (req,res)=>{
+  Todos.find()
+    .then(data =>{
+      res.send({
+        msg: "Todos fetch success " ,
+        task : data
+      })
+    })
+    .catch(err =>{
+      res.send({
+        msg : err.message
+      })
+    })  
+})
 
+// Update 
+app.put('/todos', async(req,res)=>{
+  const {id} = req.body ;
+  let todo = await Todos.find({_id : id} ) ;
 
-  res.send("")
+  todo.status = !todo.status ;
+
+})
+
+// Delete a document
+app.delete('/todos', (req,res)=>{
+  const {id} = req.body ;
+
 })
 
 
-app.post('/orders', async (req, res) => {
-    const {productName, price, customerId} = req.body;
-    let newOrder = await order.insertOne({
-        productName,
-        customerId,
-        price
-    })
-    res.status(200).json({
-        message: 'Order is Created Successfully',
-        newOrder
-    })
+app.put('/clear-completed', (req,res)=>{
+
 })
+
 
 app.listen(PORT, () => {
   console.log('Listening to http://localhost:' + PORT);
