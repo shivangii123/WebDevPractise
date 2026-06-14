@@ -71,6 +71,10 @@ app.put('/todos', async(req,res)=>{
 app.delete('/todos', (req,res)=>{
   const {id} = req.body ;
 
+  Todos.delete({
+    _id : id 
+  })
+
 })
 
 
