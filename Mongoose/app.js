@@ -64,7 +64,12 @@ app.put('/todos', async(req,res)=>{
   let todo = await Todos.find({_id : id} ) ;
 
   todo.status = !todo.status ;
+  await todo.save();
 
+  res.json({
+    msg: "Status Updated Succesfully"  
+    
+  })
 })
 
 // Delete a document

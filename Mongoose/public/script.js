@@ -150,11 +150,11 @@ function refreshTodos(){
     //Fetch all the tasks,then load it again on taskList
     axios.get('/todos')
         .then(({data})=>{
-            console.log('all todos data', data.allTodos);
-            currentTodos = data.allTodos; //update data
+            console.log('all todos data is : ', data.task);
+            currentTodos = data.task; //update data
             
             // Now show all todos on UI..
-            renderTodosOnUI(data.allTodos) ;   
+            renderTodosOnUI(data.task) ;   
         })
 }
 
