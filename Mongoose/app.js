@@ -79,11 +79,16 @@ app.delete('/todos', (req,res)=>{
   Todos.delete({
     _id : id 
   })
+  res.send("delete a todo")
 
 })
 
 
 app.put('/clear-completed', (req,res)=>{
+  Todos.delete({
+    status : true
+  })
+  res.send("cleared the completed todos")
 
 })
 
