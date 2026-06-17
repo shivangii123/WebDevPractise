@@ -88,7 +88,7 @@ app.put('/clear-completed', (req,res)=>{
   Todos.delete({
     status : true
   })
-  res.send("cleared the completed todos")
+  res.send("Cleared the completed todos")
 
 })
 
