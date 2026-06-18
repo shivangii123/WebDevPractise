@@ -31,10 +31,13 @@ const Todos = mongoose.model('Todos', TodosSchema) ;
 
 // 3. Inserting a document
 app.post('/todos',(req,res)=>{
-    const todo = req.body ;
+    const {task} = req.body ;
     
-    const newTodo = new Todos({task})
-    newTodo.save() ;
+    // const newTodo = new Todos({task})
+    // newTodo.save() ;
+
+    // or
+    Todos.create({task , status :false }) 
 
     res.send({
       msg :"Insertion done" ,
@@ -73,10 +76,10 @@ app.put('/todos', async(req,res)=>{
 })
 
 // Delete a document
-app.delete('/todos', (req,res)=>{
+app.delete('/todos', async(req,res)=>{
   const {id} = req.body ;
 
-  Todos.delete({
+  await Todos.deleteOne({
     _id : id 
   })
   res.send("delete a todo")
@@ -84,8 +87,8 @@ app.delete('/todos', (req,res)=>{
 })
 
 
-app.put('/clear-completed', (req,res)=>{
-  Todos.delete({
+app.put('/clear-completed', async(req,res)=>{
+  await Todos.delete({
     status : true
   })
   res.send("Cleared the completed todos")
