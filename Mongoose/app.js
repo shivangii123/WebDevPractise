@@ -3,41 +3,41 @@ const app = express();
 const path = require('path');
 const PORT = 4444;
 const mongoose = require('mongoose') ;
+const Todos= require('./models/Todos.model');
+const Users = require('./models/Users.model');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'))) ;
 
-
-mongoose.connect('mongodb://127.0.0.1:27017/Test')
-  .then((data)=>{
-    console.log("DB conected");
+//fetching User, for now ,only one user until we make Login/sign up
+app.use(async (req,res,next)=>{
+  let User = await Users.findOne({
+    name: 'Vaibhav' 
   })
-  .catch((err)=>{
-    console.log(err.message);
+
+  req.user = User ; //Add user inside the req Object
+  next() ;
+})
+
+
+mongoose.connect('mongodb://127.0.0.1:27017/Test').then((data)=>{
+    console.log("DB conected");
   })
 
   
-// 1.Create Schema(blueprint of Model looks like)
-const TodosSchema = new mongoose.Schema({
-    task : String,
-    status : {type : Boolean, default :false} ,
-    date :{type :Date,default :Date.now}  
-})
-
-// 2. Create a Model (i.e Collection, in which we insert documents)
-// this collection has Constraints on it
-const Todos = mongoose.model('Todos', TodosSchema) ;
 
 // 3. Inserting a document
-app.post('/todos',(req,res)=>{
+app.post('/todos', async (req,res)=>{
     const {task} = req.body ;
+    console.log(req.user) ;//We can now use the Users via req.user(that we added inside req Object)
     
-    // const newTodo = new Todos({task})
+    // const newTodo = new Todos({task, user_id: req.users._id})
     // newTodo.save() ;
 
     // or
-    Todos.create({task , status :false }) 
+    const newTodo = await Todos.create({task , user_id: req.user._id }) 
+    console.log(newTodo) ;
 
     res.send({
       msg :"Insertion done" ,
@@ -64,7 +64,7 @@ app.get('/todos', (req,res)=>{
 // Update 
 app.put('/todos', async(req,res)=>{
   const {id} = req.body ;
-  let todo = await Todos.find({_id : id} ) ;
+  let todo = await Todos.findById(id) ;
 
   todo.status = !todo.status ;
   await todo.save();
@@ -88,7 +88,7 @@ app.delete('/todos', async(req,res)=>{
 
 
 app.put('/clear-completed', async(req,res)=>{
-  await Todos.delete({
+  await Todos.deleteMany({
     status : true
   })
   res.send("Cleared the completed todos")

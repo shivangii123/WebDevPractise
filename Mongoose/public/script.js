@@ -120,6 +120,7 @@ taskList.addEventListener('click', (e)=>{
         let id = elm.dataset.id;// todo_task ki id
         axios.put('/todos', {id})
             .then(({data})=>{
+                console.log("data is :" , data);
                 refreshTodos();
             })
             .catch(err=>{ alert(err.message) 
