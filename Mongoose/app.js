@@ -11,6 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'))) ;
 
 //fetching User, for now ,only one user until we make Login/sign up
+
+
 app.use(async (req,res,next)=>{
   let User = await Users.findOne({
     name: 'Vaibhav' 
