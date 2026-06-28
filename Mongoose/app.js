@@ -23,10 +23,13 @@ app.use(async (req,res,next)=>{
 })
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/Test').then((data)=>{
+mongoose.connect('mongodb://127.0.0.1:27017/Test')
+  .then((data)=>{
     console.log("DB conected");
   })
-
+  .catch((err)=>{
+    console.log(err.message)
+  })
   
 
 // 3. Inserting a document
