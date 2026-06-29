@@ -45,7 +45,7 @@ app.post('/todos', async (req,res)=>{
     console.log(newTodo) ;
 
     res.send({
-      msg :"Insertion done" ,
+      msg :"Insertion done success " ,
       task
     })
 })
