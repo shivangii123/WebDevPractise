@@ -18,7 +18,7 @@ app.get('/post', (req,res)=>{
     res.json({
         id: 1,
         title : "My Title",
-        desc : "Hey this is description"
+        desc : "Hey this is description "
     });
 })
 
