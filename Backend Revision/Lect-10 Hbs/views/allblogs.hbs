@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> This is all blogs page..</h1>
+{{!-- 
+    {{ #each blogs }}
+    <ul>
+        <li> 
+            <img src="{{this.blog.blogImage}}" alt="">
+            <h1>Title: {{this.title}} </h1>
+            <p>desc: {{this.desc}} </p>
+            <h4> author {{this.author}} </h4>
+        </li>
+    </ul>
+
+    {{/each}}   --}}
+    {{#each blogs}}
+        <ul>
+            <li>
+                <img src="{{this.blogImage}}" alt="">
+                <h1>Title: {{this.title}}</h1>
+                <p>Desc: {{this.desc}}</p>
+                <h4>Author: {{this.author}}</h4>
+            </li>
+        </ul>
+    {{/each}}  
+</body>
+</html>

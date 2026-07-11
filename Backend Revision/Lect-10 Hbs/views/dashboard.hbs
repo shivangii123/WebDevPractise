@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1> Admin Dashboard </h1>
+
+{{!-- // Jo login hoga usla name show --}}
+
+    <header><h1> {{user.name}} </h1></header> 
+        {{!-- if-Else  ...--}}
+    {{#if user.isAdmin}}
+   
+        <h2> allUsers :{{dashboard.users}} </h2>
+        <h2> allmovies :{{dashboard.movies}} </h2>
+    {{else}}
+        <h1> You are not an Admin..</h1>
+
+    {{/if}}
+</body>
+</html>
