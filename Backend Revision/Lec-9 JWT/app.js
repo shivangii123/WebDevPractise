@@ -80,6 +80,7 @@ async function isLogin(req, res, next){
             message :"please login"
         })
     }
+    // verify token
     let decode =Jwt.verify(token , "Anything") ;
     console.log("decoded is :", decode) ;
     if(!decode){
