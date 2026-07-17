@@ -8,6 +8,8 @@
 
 //nodejs already have fs(file-system)
 const fs = require('fs');// returns object
+const os = require('os');
+console.log("Total CPU: ",os.cpus().length);//cpu in laptop 
 
 // fs.(whatever we need to get from fs module)->>access anything from fs
 
