@@ -11,6 +11,8 @@ app.get('/', (req, res) => {
   res.send('welcome all of you ..!!!\n how are you');
 });
 
+// res.session; 
+
 app.listen(PORT, () => {
   console.log('Listening to http://localhost:' + PORT);
 });
