@@ -12,6 +12,9 @@ app.get('/', (req, res) => {
 });
 
 // res.session; 
+app.post("/", (req, res)=>{
+  console.log("data posted");
+})
 
 app.listen(PORT, () => {
   console.log('Listening to http://localhost:' + PORT);
