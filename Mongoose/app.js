@@ -92,6 +92,7 @@ app.delete('/todos', async(req,res)=>{
 })
 
 
+//Delete all completed todos
 app.put('/clear-completed', async(req,res)=>{
   await Todos.deleteMany({
     status : true
