@@ -87,8 +87,7 @@ app.delete('/todos', async(req,res)=>{
   await Todos.deleteOne({
     _id : id 
   })
-  res.send("delete a todo")
-
+  res.send("deleted a todo you selected !")
 })
 
 
