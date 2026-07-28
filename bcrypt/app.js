@@ -60,11 +60,12 @@ app.post('/login', async(req, res)=>{
     
     // user.password -> is hash passord, match both and check if valid..
     const match = await bcrypt.compare(password, user.password);
+
     if(match) res.status(200).json({
         msg :"Login successfull"
     })
     else res.status(400).json({
-        msg :"Login failed ,Incorrect Password !!"
+        msg :"Login failed ,Incorrect Password !"
     })
 
 })
