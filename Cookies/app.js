@@ -8,6 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 
  
 app.get('/profile',(req,res)=>{
+  
   console.log("first login to enter");
 
   console.log('redirecting to login page');
