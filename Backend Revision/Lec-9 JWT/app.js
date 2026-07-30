@@ -75,6 +75,7 @@ async function isLogin(req, res, next){
     // token from either in cookies or in local storage
     let token = req.cookies.token || req.headers.authorization ;
     console.log(token);
+    
     if(!token){
         return res.json({
             message :"please login"
