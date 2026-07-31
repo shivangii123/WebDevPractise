@@ -11,6 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   console.log('Home page');
+  
   res.send('welcome all of you ..!!!\n how are you');
 });
 
