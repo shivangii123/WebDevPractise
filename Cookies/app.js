@@ -2,10 +2,14 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const PORT = 4444;
+const cookie = require('cookie') ;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', (req, res)=>{
+  res.send("learning cookie");
+})
  
 app.get('/profile',(req,res)=>{
   
