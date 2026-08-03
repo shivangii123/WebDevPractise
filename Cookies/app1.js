@@ -1,4 +1,4 @@
-//cookie- using POSTMAN
+//cookie- using BROWSER
 
 const { error } = require('console');
 const express = require('express');
@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')) ) ;
 
 mongoose.connect('mongodb://localhost:27017/testing123').then(()=>{
   app.listen(PORT, () => {
