@@ -8,10 +8,19 @@
 <body>
 
     <div style="display: flex; justify-content: space-around;">  
-        <a href="signup.html"> SIGNUP </a>
         <a href="index.html"> HOME </a>
+        <a href="signup.html"> SIGNUP </a>
     </div>
+
     <h1> This is Login PAGE..</h1>
+
+
+    <form action="/login" method="POST">
+        <input type="text" placeholder="Enter email" name="email"> <br>
+        <input type="text" placeholder="Enter passwword" name="password"> <br> <br>
+
+        <button type="submit" > Login</button>
+    </form>
     
 </body>
 </html>

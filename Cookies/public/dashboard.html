@@ -4,12 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dashboardPage</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        async function isLoggedIn() {
+            let {data} = await axios.get('/isloggedin');
+                
+            if(!data.isLoggedIn){window.location = 'http://localhost:4444/login.html' }  
+        }
+        isLoggedIn() ;
+
+    </script>
 </head>
 <body>
     <div style="display: flex; justify-content: space-around;">  
+        <!-- <a href="index.html"> HOME </a>
         <a href="login.html"> LOGIN </a>
-        <a href="signup.html"> SIGNUP </a>
-        <a href="index.html"> HOME </a>
+        <a href="signup.html"> SIGNUP </a> -->
     </div>
 
     <h1> This is Dashboard PAGE..</h1>

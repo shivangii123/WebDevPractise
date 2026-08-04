@@ -15,7 +15,11 @@ app.get("/", (req,res)=>{
 app.get("/set-cookie", (req,res)=>{
     res.cookie("Name" , "Shivangi") ; // set cookie
     res.cookie("Email", "shivangi1234@gmail.com") ;
-    res.send("cookie has been sent") ;
+    res.send("cookie has been sent" , {
+        maxAge : 15* 1000 , // 15 sec , always write in miliseconds
+        httpOnly : true  //cookie expire after 15sec ,"/profile" give error
+    
+    }) ;
 })
 
 //.toString() -> can't get back string,(netwrk par ham string bhejenge, so convrt to string)

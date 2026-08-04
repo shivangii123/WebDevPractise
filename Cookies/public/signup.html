@@ -7,11 +7,20 @@
 </head>
 <body>
     <div style="display: flex; justify-content: space-around;">  
-        <a href="login.html"> LOGIN </a>
         <a href="index.html"> HOME </a>
+        <a href="login.html"> LOGIN </a>
     </div>
 
     <h1> This is Signup PAGE..</h1>
+
+    <form action="/signup" method="POST">
+
+        <input type="text" placeholder="Enter name" name="name"> <br>
+        <input type="text" placeholder="Enter email" name="email"> <br>
+        <input type="text" placeholder="Enter passwword" name="password"> <br> <br>
+
+        <button type="submit" > Signup</button>
+    </form>
     
 </body>
 </html>
