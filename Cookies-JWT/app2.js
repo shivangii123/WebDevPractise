@@ -39,7 +39,7 @@ app.get('/check-token', (req, res)=>{
 
   } catch (error) {
     res.send({
-      msg : "invalid Token",
+      msg : "invalid Token, give correct one!",
       err: error.message
      })
   }
